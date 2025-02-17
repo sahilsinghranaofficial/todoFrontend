@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AppContext from "../context/AppContext";
 
-function AddTodoInput({fetchTasks}) {
+function AddTodoInput() {
   const [todoInput, setTodoInput] = useState("")
+
+  const appContext = useContext(AppContext)
+
+  const fetchTasks = appContext.fetchTasks;
+
+  console.log("appContext",appContext)
+
   function addTodo(e) {
     e.preventDefault();
 
@@ -10,7 +18,7 @@ function AddTodoInput({fetchTasks}) {
       return;
     }
 
-    fetch("http://localhost:8080", {
+    fetch("http://localhost:8080/todo", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"

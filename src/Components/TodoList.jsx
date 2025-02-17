@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
+
 function TodoList(props) {
-  const { taskList } = props;
+  const appContext = useContext(AppContext)
+  const taskList = appContext.taskList
   console.log("TodO list:m ", taskList)
 
   return (
