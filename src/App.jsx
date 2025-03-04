@@ -4,14 +4,20 @@ import TodoList from "./Components/TodoList";
 import "./App.css";
 import { useEffect, useState } from "react";
 import AppContext from "./context/AppContext";
+import axios from "axios";
+
 
 function App() {
+
   const [taskList, setTaskList] = useState([]);
 
   function fetchTasks() {
-    fetch("http://localhost:8080/todo").then(async (response) => {
-      const jsonRes = await response.json();
-      setTaskList(jsonRes);
+    axios.get("http://localhost:8080/todo", {
+      headers : {
+        Authorization : localStorage.getItem("token")
+      }
+    }).then(async (response) => {
+      setTaskList(response.data);
     });
   }
 
@@ -20,6 +26,7 @@ function App() {
   }, []);
 
   console.log(taskList);
+
 
   return (
     <AppContext.Provider value={{ fetchTasks: fetchTasks, taskList: taskList }}>
@@ -33,14 +40,3 @@ function App() {
 }
 
 export default App;
-
-
-123 - //asdasd - /asdlkzkcx - la;sdk;l
-123 - //zxc,mn,
-
-if(username === "saihl" && password === "123") {
-  return true;
-}
-
-
-
